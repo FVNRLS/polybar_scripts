@@ -4,9 +4,12 @@ nm-connection-editor
 
 Requirements:
 
+1) make the script executable:
+sudo chmod +x network_manager.sh
+
+2) define in /etc/sudoers to start ethtool without asking for the sudo password:
 sudo subl /etc/sudoers
 username ALL=(ALL) NOPASSWD: /usr/bin/ethtool
-
 
 
 polybar config:
@@ -17,4 +20,4 @@ exec					= <path_to_username>/.config/polybar/modules/network_manager/network_ma
 interval 				= 10
 click-left 				= nm-connection-editor
 format 					= <label>
-label-foreground		= #50fa7b
+label-foreground			= #50fa7b
