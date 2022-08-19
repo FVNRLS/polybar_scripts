@@ -13,5 +13,3 @@ Some scripts (mostly written in Bash or Python) will require sudo rights (entry 
 Please also note that the more permissions you give to different applications, the more insecure your operating system becomes overall, as it opens up spiyial fields for potential attacks that were previously possible.
 
 If you have any questions or suggestions, please do not hesitate to contact me.
-
-Translated with www.DeepL.com/Translator (free version)
