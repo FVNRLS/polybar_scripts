@@ -1,7 +1,7 @@
 # polybar_scripts
-Own polybar scripts to automize tasks and track system states.
 
-**Description**<br>
+<br>
+**Description**<br><br>
 Dear friends and guests of my Github page,
 
 here I will publish my own scripts for Polybar, which I use in conjunction with the tiling window manager i3.
