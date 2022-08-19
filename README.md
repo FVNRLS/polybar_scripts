@@ -1,7 +1,6 @@
 # polybar_scripts
 
-<br>
-**Description**<br><br>
+<br>**Description**<br><br>
 Dear friends and guests of my Github page,
 
 here I will publish my own scripts for Polybar, which I use in conjunction with the tiling window manager i3.
