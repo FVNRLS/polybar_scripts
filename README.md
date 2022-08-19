@@ -3,7 +3,7 @@
 <br>**Description**<br><br>
 Dear friends and guests of my Github page,
 
-here I will publish my own scripts for Polybar, which I use in conjunction with the tiling window manager i3.
+here I will publish my own custom scripts for Polybar, which I use in conjunction with the tiling window manager i3.
 
 Use them with caution, because unfortunately it is not always guaranteed that they work with other configurations than mine.
 
