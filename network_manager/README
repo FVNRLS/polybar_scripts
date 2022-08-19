@@ -1,0 +1,20 @@
+Dependencies:
+ethtool
+nm-connection-editor
+
+Requirements:
+
+sudo subl /etc/sudoers
+username ALL=(ALL) NOPASSWD: /usr/bin/ethtool
+
+
+
+polybar config:
+
+[module/network_manager]
+type 					= custom/script
+exec					= <path_to_username>/.config/polybar/modules/network_manager/network_manager.sh
+interval 				= 10
+click-left 				= nm-connection-editor
+format 					= <label>
+label-foreground		= #50fa7b
