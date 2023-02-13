@@ -1,26 +1,29 @@
-#!/bin/sh
+#!/bin/bash
 
-wifi_state=$(sudo ethtool wlp1s0 | grep "Link detected" | cut -f 2 | cut -c 16-18)
-ethernet_exists=$(ls /sys/class/net/ | grep enp0s20f0u3u4u2 | wc -l)
+WIRELESS_INTERFACE=$(ip link | awk -F: '/wlp/ {print $2;getline}' | sed 's/ //')
+WIRELESS_STATE=$(ip link show "$WIRELESS_INTERFACE" | grep "state UP" > /dev/null 2>&1; echo $?)
+ETHERNET_INTERFACE=$(ip link | awk -F: '$0 !~ "lo|vir|wl|^[^0-9]"{print $2;getline}' | grep "en" | head -1 | sed 's/ //')
 
-if [[ $wifi_state -eq  "no" && $ethernet_exists -eq  0 ]]
-then
-	icon="  "
+if [[ -z $ETHERNET_INTERFACE ]]; then
+  ETHERNET_EXISTS=1
 else
-	if [[ $ethernet_exists -gt 0 ]]
-	then
-		ethernet_state=$(sudo ethtool enp0s20f0u3u4u2 | grep "Link detected" | cut -f 2 | cut -c 16-18)
-		if [[ $wifi_state -eq "no" && $ethernet_state -eq "yes" ]]
-		then
-			icon="  "
-		elif [[ $wifi_state -eq  "yes" && $ethernet_state -eq  "yes" ]]
-		then
-			icon="  "
-		elif [[ $wifi_state -eq  "yes" && $ethernet_exists -eq  "0" ]]
-		then
-			icon="  "
-		fi	
-	fi
+  ETHERNET_EXISTS=$(ip link show "$ETHERNET_INTERFACE" > /dev/null 2>&1; echo $?)
 fi
 
-echo "${icon}"
+if [[ $WIRELESS_STATE -ne 0 && $ETHERNET_EXISTS -ne 0 ]]; then
+  ICON="  "
+elif [[ $WIRELESS_STATE -eq 0 || $ETHERNET_EXISTS -eq 0 ]]; then
+  if [[ -z $ETHERNET_INTERFACE ]]; then
+    ICON="  "
+  else
+    ETHERNET_STATE=$(ip link show "$ETHERNET_INTERFACE" | grep "state UP" > /dev/null 2>&1; echo $?)
+
+    if [[ $ETHERNET_STATE -eq 0 ]]; then
+      ICON="  "
+    elif [[ $WIRELESS_STATE -eq 0 ]]; then
+      ICON="  "
+    fi
+  fi
+fi
+
+echo "${ICON}"
